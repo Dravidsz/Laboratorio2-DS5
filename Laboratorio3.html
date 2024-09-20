@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Laboratorio 5t</title>
+</head>
+<body>
+    <form action="lab3" >Ingresar Texto
+        <input type="text"  id="input">
+        <span id="response"></span>
+    </form>
+    <div class="output"></div>
+</body>
+<script>
+
+
+const Utils = (() => {
+    const reverseString = (n) => {
+        return String(n).split('').reverse().join('');
+    };
+    return { reverseString };
+})();
+
+const App = (() => {
+    const htmlElements = {
+        input: document.querySelector("#input"),
+        output: document.querySelector(".output"),
+    };
+
+    const handlers = {
+        handleInputChange: () => {
+            const inputValue = htmlElements.input.value;
+            const reversedValue = Utils.reverseString(inputValue);
+            htmlElements.output.innerHTML =`<div><h3>El valor invertido es: <span >${reversedValue}</span><h/3><div>`;
+        },
+    };
+
+    const init = () => {
+        htmlElements.input.addEventListener("input", handlers.handleInputChange);
+    };
+
+    return { init };
+})();
+
+
+document.addEventListener("DOMContentLoaded", App.init);
+
+    
+</script>
+</html>
