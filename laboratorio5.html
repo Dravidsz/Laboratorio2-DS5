@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Laboratorio 5t</title>
+</head>
+<body>
+    <form action="lab3" name="form">Ingresar Texto
+        <input type="text"  id="input">
+        <span id="response"></span>
+        <select name="cadena" id="cadena">
+            <option value="white">Blanco</option>
+            <option value="blue">Azul</option>
+            <option value="grey">Gris</option>
+        </select>
+    </form>
+
+    <div class="output"></div>
+</body>
+<style>
+    :root {
+        --color-gray: gray;
+        --color-blue: blue;
+        --color-white: white;
+    }
+    
+    .body  {
+            background-color: aquamarine;
+    }
+
+
+</style>
+<script>
+
+
+const Utils = (() => {
+    const reverseString = (n) => {
+        return String(n).split('').reverse().join('');
+    };
+    return { reverseString };
+
+        
+    
+
+        
+    
+})();
+
+const App = (() => {
+    const htmlElements = {
+        input: document.querySelector("#input"),
+        output: document.querySelector(".output"),
+        addColor:document.querySelector(".select")
+        
+        
+    };
+
+    
+
+    const handlers = {
+        handleInputChange: () => {
+            const inputValue = htmlElements.input.value;
+            const reversedValue = Utils.reverseString(inputValue); 
+            const option = addColor.option.value;
+            htmlElements.output.innerHTML =`<div><h3>El valor invertido es: <span  ${option}>${reversedValue}</span><h/3><div>`;
+        },
+
+        addColorText: () =>{
+            const option = document.querySelector(".option");
+            const colorElegido = option.value;
+
+
+
+        }
+        
+    };
+
+    
+    const init = () => {
+        htmlElements.input.addEventListener("input", handlers.handleInputChange);
+    };
+
+    return { init };
+})();
+
+
+document.addEventListener("DOMContentLoaded", App.init);
+
+
+</script>
+</html>
