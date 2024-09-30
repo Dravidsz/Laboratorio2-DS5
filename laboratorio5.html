@@ -1,92 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laboratorio 5t</title>
 </head>
-<body>
-    <form action="lab3" name="form">Ingresar Texto
-        <input type="text"  id="input">
-        <span id="response"></span>
-        <select name="cadena" id="cadena">
-            <option value="white">Blanco</option>
-            <option value="blue">Azul</option>
-            <option value="grey">Gris</option>
-        </select>
-    </form>
 
-    <div class="output"></div>
+<body>
+    <div>
+        <h1>Laboratorio DS V</h1>
+        <form action="lab3" name="form">
+            <input type="text" id="input" placeholder="Ingresa Texto">
+            <span id="response"></span>
+            <select name="cadena" id="cadena">
+                <option value="white">Blanco</option>
+                <option value="blue">Azul</option>
+                <option value="grey">Gris</option>
+            </select>
+        </form>
+
+        <div class="output"></div>
+    </div>
 </body>
 <style>
+    body,
+    html {
+        font-family: 'Courier New', Courier, monospace;
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     :root {
         --color-gray: gray;
         --color-blue: blue;
         --color-white: white;
     }
-    
-    .body  {
-            background-color: aquamarine;
+
+    body {
+        background: rgb(238, 174, 202);
+        background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
     }
-
-
 </style>
 <script>
+    const Utils = (() => {
+        const reverseString = (n) => {
+            return String(n).split('').reverse().join('');
+        };
+        return { reverseString };
+    })();
 
+    const App = (() => {
+        const htmlElements = {
+            input: document.querySelector("#input"),
+            output: document.querySelector(".output"),
+            select: document.querySelector("#cadena"),
+        };
 
-const Utils = (() => {
-    const reverseString = (n) => {
-        return String(n).split('').reverse().join('');
-    };
-    return { reverseString };
+        const handlers = {
+            handleInputChange: () => {
+                const inputValue = htmlElements.input.value;
+                const reversedValue = Utils.reverseString(inputValue);
+                const selectedColor = htmlElements.select.value;
+                htmlElements.output.innerHTML = `<div><h3>El valor invertido es: <span style="color:${selectedColor};">${reversedValue}</span></h3></div>`;
+            },
+        };
 
-        
-    
+        const init = () => {
+            htmlElements.input.addEventListener("input", handlers.handleInputChange);
+            htmlElements.select.addEventListener("change", handlers.handleInputChange);
+        };
 
-        
-    
-})();
+        return { init };
+    })();
 
-const App = (() => {
-    const htmlElements = {
-        input: document.querySelector("#input"),
-        output: document.querySelector(".output"),
-        addColor:document.querySelector(".select")
-        
-        
-    };
-
-    
-
-    const handlers = {
-        handleInputChange: () => {
-            const inputValue = htmlElements.input.value;
-            const reversedValue = Utils.reverseString(inputValue); 
-            const option = addColor.option.value;
-            htmlElements.output.innerHTML =`<div><h3>El valor invertido es: <span  ${option}>${reversedValue}</span><h/3><div>`;
-        },
-
-        addColorText: () =>{
-            const option = document.querySelector(".option");
-            const colorElegido = option.value;
-
-
-
-        }
-        
-    };
-
-    
-    const init = () => {
-        htmlElements.input.addEventListener("input", handlers.handleInputChange);
-    };
-
-    return { init };
-})();
-
-
-document.addEventListener("DOMContentLoaded", App.init);
-
-
+    document.addEventListener("DOMContentLoaded", App.init);
 </script>
+
 </html>
